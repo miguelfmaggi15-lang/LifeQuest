@@ -1,5 +1,11 @@
 # LIFE QUEST — Jogo da Vida Digital 3D Multiplayer
 
+## Jogar online
+
+**[Abrir o Life Quest](https://miguelfmaggi15-lang.github.io/LifeQuest/)** — compartilhe este link com qualquer pessoa.
+
+O GitHub Pages publica a entrada em `docs/index.html`, que encaminha para o [jogo hospedado](https://lifequest-jogo.efmm4maggi.chatgpt.site/). O multiplayer e o banco de dados continuam na hospedagem Cloudflare Worker/D1; o GitHub Pages serve apenas arquivos estáticos. O acesso ao jogo é público e permite jogar por apelido, sem criar conta.
+
 Este repositório reúne duas versões do projeto:
 
 - **Versão original PHP/MySQL:** os arquivos na raiz, com instalação via XAMPP descrita abaixo.
