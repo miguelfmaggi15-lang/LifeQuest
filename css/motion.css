@@ -1,0 +1,11 @@
+/* Uma entrada no convite; respostas curtas às ações da partida. */
+@keyframes m-invite{from{transform:translateY(10px);opacity:.6}to{transform:none;opacity:1}}
+@keyframes m-flip{from{transform:translateY(8px);opacity:.7}to{transform:none;opacity:1}}
+@keyframes m-spin{to{transform:rotate(360deg)}}
+.hero-copy{animation:m-invite .45s cubic-bezier(.16,1,.3,1) both}
+[data-reveal]{opacity:1;transform:none}
+.card3d.deal,.event-card.deal,.modal.open .modal-card{animation:m-flip .2s ease-out}
+.toast.arrive{animation:m-flip .18s ease-out}
+#btnSpin.loading{opacity:.75;pointer-events:none}
+#btnSpin.loading::after{content:"";display:inline-block;width:14px;height:14px;border:2px solid #97772e;border-top-color:transparent;border-radius:50%;animation:m-spin .7s linear infinite}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}

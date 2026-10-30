@@ -1,0 +1,40 @@
+# Dependencies, generated builds, and local runtime data
+node_modules/
+.next/
+.vinext/
+dist/
+out/
+coverage/
+.wrangler/
+.sites-runtime/
+.vercel/
+.pnp*
+.yarn/
+
+# Preserve the existing nested checkout locally without publishing its Git data
+/hosted/.git/
+
+# Credentials and local configuration
+.env*
+!.env.example
+.dev.vars*
+*.pem
+*.key
+*.p12
+*.pfx
+.npmrc
+.openai/
+
+# Local tools, exports, and temporary files
+.agents/
+.codex/
+outputs/
+work/
+*.log
+*.tsbuildinfo
+next-env.d.ts
+*.tar
+*.tar.gz
+*.zip
+.DS_Store
+Thumbs.db

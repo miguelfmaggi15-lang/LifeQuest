@@ -1,0 +1,104 @@
+/* LIFE QUEST — tela de jogo imersiva: mapa full-bleed + HUD flutuante */
+#screen-game.game-full{max-width:none; padding:0 10px;
+  margin-left:calc((100% - 100vw) / 2); margin-right:calc((100% - 100vw) / 2)}
+#screen-game.game-full .turn-banner.slim{max-width:1720px; margin-left:auto; margin-right:auto}
+/* mapa na tela toda */
+.game-stage{position:relative; margin-top:10px}
+.game-stage #board .island-wrap{height:calc(100vh - 150px) !important; min-height:620px}
+.turn-banner.slim{display:flex; align-items:center; justify-content:center; gap:10px; padding:10px 14px}
+.turn-banner.slim small{font-size:11px; letter-spacing:2px}
+/* trilhos flutuantes */
+.rail{position:absolute; top:12px; z-index:6; width:250px; display:grid; gap:10px; align-content:start}
+.rail-left{left:12px}
+.rail-right{right:12px; width:292px}
+.rail .players,.spin-box,.rail .tabs,.rail .tabpage{background:#fffdf8; border:0;
+  border-radius:16px; padding:12px; box-shadow:0 8px 22px #10274b20; color:var(--ink)}
+.players.compact{display:grid; gap:8px}
+.players.compact .player-row{padding:8px 10px; font-size:13px; margin:0}
+.players.compact .avatar{width:36px; height:36px; flex-basis:36px; font-size:16px; border-radius:11px}
+.players.compact .pturn{font-size:10px; padding:3px 7px}
+.spin-box{display:grid; gap:8px; justify-items:center}
+.roulette.mini{width:184px; height:184px; border-width:8px}
+.roulette.mini .roulette-hub{width:58px; height:58px; margin:-29px; font-size:26px}
+.roulette.mini .num i{font-size:14px; width:24px; height:24px; margin:-12px}
+.roulette-hub.hit{animation:hubHit .8s ease}
+@keyframes hubHit{0%{transform:scale(1)}35%{transform:scale(1.4); box-shadow:0 0 0 10px #fdcb6e77, 0 10px 24px #000a}100%{transform:scale(1)}}
+#btnSpin{width:100%; font-size:18px; padding:13px}
+#spinMsg{font-size:12px; text-align:center; min-height:18px}
+#spinMsg.hit{color:var(--gold,#fdcb6e); font-weight:900; font-size:16px}
+/* abas */
+.rail .tabs{display:flex; gap:6px; padding:8px}
+.tabs [role="tab"]{flex:1; background:transparent; border:0; color:var(--muted,#a9b2d8); font-weight:800; font-size:13px;
+  padding:10px 4px; border-radius:10px; cursor:pointer; border-bottom:3px solid transparent; min-height:44px}
+.tabs [role="tab"].on{color:var(--ink); background:#fff0c4; border-bottom-color:var(--gold,#fdcb6e)}
+.tabs .badge{display:inline-grid; place-items:center; min-width:20px; height:20px; padding:0 5px; border-radius:999px;
+  background:var(--pink,#e84393); color:#fff; font-size:11px; margin-left:4px}
+.tabs .badge[hidden]{display:none}
+.rail .tabpage{max-height:430px; overflow:auto}
+.rail .tabpage .feed{max-height:390px; background:transparent; border:0; padding:0}
+#mePanel{font-size:14px}
+/* legenda sobre o mapa */
+.map-legend{position:absolute; left:50%; transform:translateX(-50%); bottom:10px; z-index:4;
+  display:flex; gap:6px; flex-wrap:wrap; justify-content:center; max-width:92%}
+.map-legend span{background:#fffdf0; border:0; color:var(--ink); font-size:11px; font-weight:700;
+  padding:4px 10px; border-radius:999px; white-space:nowrap}
+/* legenda de categorias (canto inferior esquerdo, como na referência) */
+.tile-key{position:absolute; left:12px; bottom:10px; z-index:5; display:grid; gap:5px;
+  background:#fffdf8; border:0; border-radius:14px; padding:10px 12px;
+  box-shadow:0 6px 18px #10274b20}
+.tile-key span{display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; color:var(--ink)}
+.tile-key i{width:18px; height:18px; border-radius:6px; border:2px solid #ffffffcc; flex:0 0 18px}
+/* overlay de decisão: carta escura central, contraste AA */
+.event-overlay{position:absolute; inset:0; z-index:20; display:grid; place-items:center; padding:16px;
+  background:rgba(8,31,58,.62)}
+.event-overlay[hidden]{display:none}
+.event-card{position:relative; width:min(580px,94%); max-height:88%; overflow:auto; background:#fffdf5;
+  border:0; border-radius:24px; padding:30px; box-shadow:0 22px 54px #081f3a40}
+.event-close{position:absolute; top:12px; right:12px; width:44px; height:44px; border-radius:12px; border:0;
+  background:#e8eee7; color:var(--ink); font-size:22px; font-weight:750; line-height:1; cursor:pointer}
+.event-close:hover{background:#ffe9a7}
+.event-close[hidden]{display:none}
+.event-card h3{font-family:var(--font-display,inherit); font-size:29px; margin:0 44px 12px 0; color:var(--ink)}
+.event-card>p{color:var(--muted); margin:0 0 6px; font-size:15px}
+.event-card .choices{counter-reset:key; display:grid; gap:10px; margin-top:14px}
+.event-card .choice{position:relative; text-align:left; background:#eef2e9; color:var(--ink); border:2px solid transparent;
+  border-radius:14px; padding:13px 14px 13px 52px; cursor:pointer; font-size:15px; transition:transform .15s, border-color .15s, box-shadow .15s; min-height:56px}
+.event-card .choice:hover{background:#fff0c6; border-color:var(--gold,#fdcb6e); box-shadow:none}
+.event-card .choice::before{counter-increment:key; content:counter(key); position:absolute; left:12px; top:50%; transform:translateY(-50%);
+   width:28px; height:28px; border-radius:50%; background:#173b58; color:#fff; font-weight:750; display:grid; place-items:center; font-size:14px}
+.event-card .choice b{display:block; font-size:16px; color:var(--ink)}
+.event-card .choice span{color:var(--muted); font-size:13px}
+.event-card .pturn{display:inline-block; margin-top:10px}
+.pick-hint{text-align:center; color:var(--muted,#a9b2d8); font-size:12px; margin:12px 0 0}
+/* mono: fileiras de terrenos + falidos */
+.deed-row{display:flex; align-items:center; justify-content:space-between; gap:8px; background:#eef2ec;
+  border:0; border-radius:12px; padding:10px; margin-top:8px; font-size:13px}
+.deed-row small{color:var(--muted,#a9b2d8)}
+.player-row.out{opacity:.55}
+.player-row.out .avatar{filter:grayscale(1)}
+#btnRoll{width:100%;font-size:18px;padding:13px}#rollMsg{font-size:12px;text-align:center;min-height:18px}
+.rail .tabpage .row{margin:10px 0}.rail .tabpage .btn-sm{min-height:40px;font-size:12px;padding:8px 10px}
+.rail .players.compact .avatar{color:#fff;border-width:2px}.game-full .game-stage{border-radius:22px;overflow:hidden}
+/* mobile: mapa em cima, HUD embaixo */
+@media (max-width:900px){
+  .game-stage{display:flex; flex-direction:column}
+  .game-stage #board .island-wrap{height:52vh !important; min-height:330px}
+  .rail{position:static; width:auto}
+  .rail-left{order:2}
+  .rail-right{order:3}
+  .players.compact{display:flex; overflow-x:auto; padding-bottom:4px}
+  .players.compact .player-row{min-width:210px}
+  .spin-box{grid-template-columns:auto 1fr; align-items:center}
+  .roulette.mini{width:120px; height:120px}
+  .roulette.mini .roulette-hub{width:42px; height:42px; margin:-21px; font-size:18px}
+  .roulette.mini .num i{font-size:10px; width:16px; height:16px; margin:-8px}
+  #btnSpin{min-height:56px}
+  .turn-banner.slim{position:sticky; top:58px; z-index:30}
+  .map-legend{display:none}
+  .tile-key{display:none}
+  .event-overlay{position:fixed; z-index:200}
+  .game-full .game-stage{overflow:visible;gap:14px}
+  .players.compact .player-row{min-width:195px}
+  .turn-banner.slim{top:var(--nav-height,96px)}
+  .deed-row{flex-wrap:wrap}
+}
