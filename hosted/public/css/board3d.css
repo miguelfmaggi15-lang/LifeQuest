@@ -1,0 +1,71 @@
+/* LIFE QUEST — tabuleiro 3D, roleta 3D, pecas, cartas */
+.board-stage{perspective:1200px; perspective-origin:50% 30%}
+.board3d{
+  transform:rotateX(46deg) rotateZ(-8deg); transform-style:preserve-3d;
+  display:grid; grid-template-columns:repeat(10,1fr); gap:8px; padding:18px;
+  background:linear-gradient(180deg,#2b3768,#1a2148 60%,#141b3d);
+  border-radius:22px; border:1px solid #ffffff2a;
+  box-shadow:0 40px 80px #000b, 0 2px 0 #ffffff33 inset, 0 -18px 40px #6c5ce722 inset;
+  position:relative;
+}
+.board3d::before{ /* relevo / grama */
+  content:""; position:absolute; inset:-24px; z-index:-1; border-radius:30px;
+  background:
+    radial-gradient(60px 30px at 12% 20%, #2ee6a855, transparent),
+    radial-gradient(80px 34px at 82% 16%, #e8439344, transparent),
+    radial-gradient(70px 30px at 70% 84%, #00b89444, transparent),
+    linear-gradient(180deg,#1e5c46,#143b2f);
+  box-shadow:0 30px 70px #000c; transform:translateZ(-34px);
+}
+.tile{
+  min-height:74px; border-radius:12px; padding:6px; position:relative; transform-style:preserve-3d;
+  background:linear-gradient(180deg,#ffffffee,#dbe4ff); color:#1a2148;
+  border:1px solid #ffffff; box-shadow:0 10px 0 #0c1230, 0 16px 26px #0009;
+  font-size:11px; font-weight:800; line-height:1.2; display:flex; flex-direction:column; gap:2px;
+  transform:translateZ(10px); transition:transform .2s, box-shadow .2s;
+}
+.tile small{font-weight:700; color:#4a5588; font-size:10px}
+.tile .n{position:absolute; top:4px; right:6px; font-size:10px; color:#8b94c4}
+.tile.payday{background:linear-gradient(180deg,#c9ffe9,#8ff0c6)}
+.tile.carreira{background:linear-gradient(180deg,#d6e6ff,#9dc0ff)}
+.tile.casa{background:linear-gradient(180deg,#ffe9c4,#ffc98a)}
+.tile.familia{background:linear-gradient(180deg,#ffd3e6,#ff9ec4)}
+.tile.sorte{background:linear-gradient(180deg,#fff3b0,#ffd76e)}
+.tile.imposto{background:linear-gradient(180deg,#ffc9c9,#ff9a9a)}
+.tile.escolha{background:linear-gradient(180deg,#e3d4ff,#b79dff)}
+.tile.inicio{background:linear-gradient(180deg,#2ee6a8,#00b894); color:#04251c}
+.tile.aposentadoria{background:linear-gradient(180deg,#fdcb6e,#ff8f6b); color:#2b1200}
+.tile.active{outline:3px solid #fff; transform:translateZ(26px) scale(1.04); box-shadow:0 18px 0 #0c1230, 0 26px 44px #000a}
+.pawns{position:absolute; left:4px; bottom:4px; display:flex; gap:3px}
+.pawn{width:22px; height:22px; border-radius:8px 8px 6px 6px; display:grid; place-items:center; font-size:12px; font-weight:900; color:#0b1023;
+  box-shadow:0 6px 10px #0008, 0 2px 0 #fff inset; transform:translateZ(22px); border:1px solid #0003; animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{0%,100%{margin-bottom:0}50%{margin-bottom:3px}}
+.board-legend{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; font-size:12px; color:var(--muted)}
+.board-legend span{background:#ffffff0e; border:1px solid #ffffff1e; padding:4px 9px; border-radius:999px}
+/* ROlETA 3D */
+.roulette-wrap{display:grid; place-items:center; gap:10px; padding:8px}
+.roulette{width:210px; height:210px; border-radius:50%; position:relative; transform-style:preserve-3d;
+  background:conic-gradient(#fdcb6e 0 36deg,#e84393 36deg 72deg,#6c5ce7 72deg 108deg,#00b894 108deg 144deg,#0984e3 144deg 180deg,#e17055 180deg 216deg,#fdcb6e 216deg 252deg,#00cec9 252deg 288deg,#ff7ab8 288deg 324deg,#2ee6a8 324deg 360deg);
+  border:10px solid #f4f6ff; box-shadow:0 24px 50px #000b, 0 4px 0 #ffffff88 inset, 0 -14px 30px #0006 inset;
+}
+.roulette::before{content:""; position:absolute; inset:16px; border-radius:50%; background:#0e143066; border:2px dashed #ffffff88}
+.roulette .num{position:absolute; inset:0; font-weight:900; color:#fff; text-shadow:0 2px 6px #000}
+.roulette .num i{position:absolute; left:50%; top:50%; font-style:normal; font-size:17px; width:26px; height:26px; margin:-13px; display:grid; place-items:center; background:#0b102acc; border-radius:50%}
+.roulette-hub{position:absolute; left:50%; top:50%; width:58px; height:58px; margin:-29px; border-radius:50%; display:grid; place-items:center; font-weight:900; font-size:20px; color:#241300;
+  background:radial-gradient(circle at 35% 30%, #fff, var(--gold) 60%, #c98a1b); box-shadow:0 10px 24px #000a, 0 2px 0 #fff inset}
+.roulette-pointer{width:0; height:0; border-left:14px solid transparent; border-right:14px solid transparent; border-top:24px solid #fff; filter:drop-shadow(0 6px 8px #0008)}
+.spinning{animation:spinDecel 3.2s cubic-bezier(.12,.8,.18,1) forwards}
+@keyframes spinDecel{from{transform:rotate(0)}to{transform:rotate(var(--spin,1800deg))}}
+/* carta */
+.card3d{background:linear-gradient(180deg,#fff,#ffeecb); color:#1a2148; border-radius:18px; padding:18px; box-shadow:0 24px 60px #000b, 0 2px 0 #fff inset; transform:rotateX(6deg); border:1px solid #fff}
+.card3d h3{margin:0 0 6px} .card3d p{margin:0; color:#4a5588}
+.money-fly{position:fixed; font-weight:900; color:var(--gold); text-shadow:0 2px 10px #000; z-index:200; pointer-events:none; animation:flyUp 1.6s ease forwards}
+@keyframes flyUp{from{opacity:1; transform:translateY(0) scale(1)}to{opacity:0; transform:translateY(-70px) scale(1.2)}}
+#fx{position:fixed; inset:0; pointer-events:none; z-index:90}
+.confetti{position:fixed; top:-12px; width:10px; height:16px; z-index:210; pointer-events:none; animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media (max-width:680px){
+  .board3d{transform:rotateX(32deg) rotateZ(0); grid-template-columns:repeat(5,1fr); gap:6px; padding:10px}
+  .tile{min-height:64px; font-size:10px}
+  .roulette{width:170px; height:170px}
+}
